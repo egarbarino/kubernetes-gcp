@@ -1,2 +1,5 @@
-# kubernetes-gcp
-Beginning Kubernetes On The Google Cloud Platform
+# Beginning Kubernetes On The Google Cloud Platform
+
+Book source code repository
+
+
