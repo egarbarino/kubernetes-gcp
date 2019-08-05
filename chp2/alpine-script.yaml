@@ -1,0 +1,17 @@
+# alpine-script.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: alpine 
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    args:
+    - sh
+    - -c
+    - |
+      while true;
+        do date;
+        sleep 1;
+      done

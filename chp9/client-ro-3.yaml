@@ -1,0 +1,23 @@
+# client-ro-3.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client-ro-3 
+spec:
+  restartPolicy: Never
+  containers:
+    - name: client-ro-3
+      image: python:alpine
+      args:
+      - bin/sh
+      - -c
+      - > 
+        python -u /var/scripts/client.py
+        server-0.server,server-1.server,server-2.server readonly
+      volumeMounts:
+        - name: scripts 
+          mountPath: /var/scripts
+  volumes: 
+    - name: scripts 
+      configMap: 
+        name: scripts 

@@ -1,0 +1,72 @@
+# Disk-based key/value store
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  ports:
+  - port: 80 
+  clusterIP: None
+  selector:
+    app: server
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  serviceName: server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      terminationGracePeriodSeconds: 10
+      containers:
+      - name: server 
+        image: python:alpine
+        args:
+        - bin/sh
+        - -c
+        - > 
+          pip install flask;
+          python -u /var/scripts/server.py 80 /var/data
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: scripts 
+            mountPath: /var/scripts
+          - name: data 
+            mountPath: /var/data
+        lifecycle:
+          postStart:
+            exec:
+              command: 
+              - /bin/sh
+              - -c
+              - rm -f /var/data/_shutting_down_
+          preStop:
+            exec:
+              command: 
+              - /bin/sh
+              - -c
+              - touch /var/data/_shutting_down_
+      volumes: 
+        - name: scripts 
+          configMap: 
+            name: scripts
+  volumeClaimTemplates:
+    - metadata:
+        name: data 
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 1Gi

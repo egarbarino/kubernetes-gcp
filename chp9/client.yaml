@@ -1,0 +1,23 @@
+# client.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client 
+spec:
+  restartPolicy: Never
+  containers:
+    - name: client
+      image: python:alpine
+      args:
+      - bin/sh
+      - -c
+      - > 
+        python -u /var/scripts/client.py
+        server-0.server,server-1.server,server-2.server
+      volumeMounts:
+        - name: scripts 
+          mountPath: /var/scripts
+  volumes: 
+    - name: scripts 
+      configMap: 
+        name: scripts 

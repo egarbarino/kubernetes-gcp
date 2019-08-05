@@ -1,0 +1,32 @@
+# myapp.yaml
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: myapp
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      app: myapp 
+  template:
+    metadata:
+      labels:
+        app: myapp
+    spec:
+      containers:
+      - name: myapp
+        image: busybox
+        env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP        
+        args: 
+        - /bin/sh
+        - -c
+        - > 
+          while true; 
+            do echo $(date) - Greetings from $HOSTNAME | 
+            nc $HOST_IP 6666; 
+            sleep 15; 
+          done

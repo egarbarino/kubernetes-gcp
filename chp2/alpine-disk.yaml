@@ -1,0 +1,23 @@
+# alpine-disk.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: alpine 
+spec:
+  restartPolicy: Never
+  volumes:
+    - name: data 
+      gcePersistentDisk:
+        pdName: my-disk
+        fsType: ext4
+  containers:
+  - name: alpine
+    image: alpine
+    args:
+    - sh 
+    - -c 
+    - date >> /data/log.txt; cat /data/log.txt
+    volumeMounts:            
+      - mountPath: "/data" 
+        name: "data"   
+ 

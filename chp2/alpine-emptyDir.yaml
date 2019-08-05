@@ -1,0 +1,24 @@
+# alpine-emptyDir.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: alpine 
+spec:
+  volumes:
+    - name: data 
+      emptyDir:
+  containers:
+  - name: alpine
+    image: alpine
+    args:
+    - sh 
+    - -c 
+    - |
+      date >> /tmp/log.txt; 
+      date >> /data/log.txt;
+      sleep 20;
+      exit 1; # exit with error
+    volumeMounts:            
+      - mountPath: "/data" 
+        name: "data"   
+ 

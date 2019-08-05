@@ -1,0 +1,17 @@
+# nginx-limited.yaml
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: nginx
+spec: 
+  containers: 
+    - image: nginx 
+      name: nginx 
+      # Compute Resource Settings 
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "500m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"

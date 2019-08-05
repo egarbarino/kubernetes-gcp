@@ -1,0 +1,38 @@
+# logCompressorProdUpdate.yaml
+apiVersion: apps/v1beta2
+kind: DaemonSet
+metadata:
+  name: logcd
+spec:
+  selector:
+    matchLabels:
+      name: logcd 
+#  updateStrategy:
+#    rollingUpdate:
+#      maxUnavailable: 1
+#    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        name: logcd 
+    spec:
+#      nodeSelector:
+#        env: prod
+      volumes:
+      - name: logdir
+        hostPath:
+          path: /var/log
+      containers:
+      - name: logcd 
+        image: busybox
+        volumeMounts:
+        - name: logdir
+          mountPath: /var/log     
+        args: 
+        - /bin/sh
+        - -c
+        - >
+          while true;
+            do tar czf /var/log/all-logs-`date +%F`.tar.gz /var/log/*.log;
+            sleep 60;
+          done

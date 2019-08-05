@@ -1,0 +1,16 @@
+# two-times.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: two-times
+spec:
+  template:
+    spec:
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - for i in $(seq 10);do echo $(($i*2));done
+        image: alpine 
+        name: two-times
+      restartPolicy: Never 

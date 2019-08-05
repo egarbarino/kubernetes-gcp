@@ -1,0 +1,12 @@
+# secrets-docker/podFromPrivate.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-app
+spec:
+  containers:
+    - name: hello-container
+      image: docker.io/egarbarino/hello-image
+  imagePullSecrets:
+    - name: docker-hub-secret
+

@@ -1,0 +1,16 @@
+# podHardCodedEnv.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod 
+spec:
+  restartPolicy: Never
+  containers:
+    - name: alpine 
+      image: alpine 
+      args: ["sh","-c","printenv | grep host"]
+      env:
+        - name: mysql_host
+          value: mysql1.company.com
+        - name: ldap_host
+          value: ldap1.company.com

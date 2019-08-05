@@ -1,0 +1,16 @@
+# configMapLongText_changed.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data-sources
+data:
+  mysql_host: mysql1.company.com
+  ldap_host: ldap1.company.com
+  address: |
+    <address>
+       <number>33</number>
+       <street>Canada Square</street>
+       <city>London</city>
+       <postcode>E14 5LB</postcode>
+    </address>
+  

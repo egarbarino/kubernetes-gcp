@@ -1,0 +1,34 @@
+# logCompressorProd.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: logcd
+spec:
+  selector:
+    matchLabels:
+      name: logcd 
+  template:
+    metadata:
+      labels:
+        name: logcd 
+    spec:
+      nodeSelector:
+        env: prod
+      volumes:
+      - name: logdir
+        hostPath:
+          path: /var/log
+      containers:
+      - name: logcd 
+        image: alpine 
+        volumeMounts:
+        - name: logdir
+          mountPath: /var/log     
+        args: 
+        - /bin/sh
+        - -c
+        - >
+          while true;
+            do tar czf /var/log/all-logs-`date +%F`.tar.gz /var/log/*.log;
+            sleep 60;
+          done

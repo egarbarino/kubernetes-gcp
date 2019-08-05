@@ -1,0 +1,25 @@
+# long-forbid.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: long
+spec:
+  concurrencyPolicy: Replace # New attribute
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            cronjob-name: long
+        spec:
+          containers:
+           - name: long 
+             image: alpine
+             args:
+             - /bin/sh
+             - -c
+             - echo $(date) on Pod $HOSTNAME - Start;
+               sleep 150;
+               echo $(date) on Pod $HOSTNAME - Finish 
+          restartPolicy: OnFailure

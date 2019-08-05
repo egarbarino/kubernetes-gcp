@@ -1,0 +1,28 @@
+# uselessDaemon.yaml
+apiVersion: apps/v1beta2
+kind: DaemonSet
+metadata:
+  name: daemon
+spec:
+  selector:
+    matchLabels:
+      name: daemon
+  template:
+    metadata:
+      labels:
+        name: daemon
+    spec:
+     containers:
+      - name: daemon
+        image: busybox
+        args: 
+        - /bin/sh
+        - -c
+        - > 
+          i=1;
+          while true; do 
+            echo -n $i | nc -l -p 1080;
+            if [ $i -lt 101 ]; then 
+              i=$(($i+1));
+            fi;
+          done

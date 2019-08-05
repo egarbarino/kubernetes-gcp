@@ -1,0 +1,20 @@
+# podManifestVolumeBinary.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: busybox
+spec:
+  containers:
+    - name: busybox
+      image: busybox
+      command: ["bin/sh"]
+      args: ["-c", "sleep 9999; exit 1"]
+      volumeMounts:
+        - name: my-volume
+          mountPath: /var/config
+  volumes: 
+    - name: my-volume 
+      configMap: 
+        name: binary
+  restartPolicy: Never
+

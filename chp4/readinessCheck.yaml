@@ -1,0 +1,38 @@
+# simpleDeployment.yaml
+apiVersion: apps/v1beta1 # may be v1 in new versions
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  replicas: 2          # (4) Number of replicas
+  selector:
+    matchLabels:       # (3) Select the label
+      app: nginx 
+  template:
+    metadata:
+      labels:
+        app: nginx     # (2) Pod label
+    spec:
+      containers:      # (1) Pod specification 
+      - name: nginx
+        image: nginx
+        readinessProbe:
+          exec:
+            command:
+            - cat
+            - /tmp/healthy
+          initialDelaySeconds: 5
+          periodSeconds: 5  
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: nginx
+spec:
+  selector:
+    app: nginx
+  ports:
+  - protocol: TCP
+    port: 80
+  type: LoadBalancer
+

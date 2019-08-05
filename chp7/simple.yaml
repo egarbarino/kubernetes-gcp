@@ -1,0 +1,19 @@
+# simple.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: simple
+spec:
+  schedule: "* * * * *"
+  jobTemplate:
+    spec:
+      template:
+       spec:
+          containers:
+          - name: simple 
+            image: alpine 
+            args:
+            - /bin/sh
+            - -c
+            - echo Executed at $(date) on Pod $HOSTNAME 
+          restartPolicy: OnFailure

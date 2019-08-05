@@ -1,0 +1,27 @@
+# multiplier.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: multiplier 
+spec:
+  parallelism: 3 
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - > 
+          while true; 
+          do n=$(nc -w 1 queue 1080);
+            if [ $(($n+0)) -ge 101 ];
+            then 
+              exit 0;
+            else r=$(($n*2))
+              echo -en "$r\n";
+              sleep 1;
+            fi;
+          done
+        name: multiplier 
+        image: alpine 

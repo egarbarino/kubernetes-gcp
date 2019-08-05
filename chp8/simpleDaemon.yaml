@@ -1,0 +1,26 @@
+# simpleDeployment.yaml
+apiVersion: apps/v1beta1 # may be v1 in new versions
+kind: Deployment
+metadata:
+  name: nginx-declarative
+spec:
+  replicas: 3          # (4) Number of replicas
+  selector:
+    matchLabels:       # (3) Select the label
+      app: nginx-app 
+  template:
+    metadata:
+      labels:
+        app: nginx-app # (2) Pod label
+    spec:
+      containers:      # (1) Pod specification 
+      - name: nginx-container
+        image: nginx:1.7.1
+        volumeMounts:
+        - name: varlog
+          mountPath: /var/log
+#    terminationGracePeriodSeconds: 30
+      volumes:
+      - name: varlog
+        hostPath:
+          path: /var/log

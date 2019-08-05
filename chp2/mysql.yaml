@@ -1,0 +1,16 @@
+# mysql.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+spec:
+  containers:
+  - image: mysql
+    name: mysql
+    ports:
+    - containerPort: 3306 
+      name: mysql 
+      protocol: TCP
+    env:
+    - name: MYSQL_ROOT_PASSWORD
+      value: mypassword

@@ -1,0 +1,27 @@
+# even-seconds.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: even-seconds 
+spec:
+  completions: 6 
+  parallelism: 2 
+  template:
+    spec:
+      restartPolicy: Never 
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - > 
+          n=$(date +%S);
+          if [ $((n%2)) -eq 0 ];
+          then 
+            echo SUCCESS: $n;
+            exit 0;
+          else 
+            echo FAILURE: $n;
+            exit 1;
+          fi
+        name: even-seconds
+        image: alpine 

@@ -1,0 +1,11 @@
+# simpleconfigmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: data-sources
+data:
+  mysql_host: mysql1.company.com
+  ldap_host: ldap1.company.com
+  secret_host: hushhush3.company.com
+
+

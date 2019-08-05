@@ -1,0 +1,13 @@
+# nginx-port.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80 
+      name: http 
+      protocol: TCP

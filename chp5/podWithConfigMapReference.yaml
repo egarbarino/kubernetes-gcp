@@ -1,0 +1,14 @@
+# podWithConfigMapReference.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod 
+spec:
+  restartPolicy: Never
+  containers:
+    - name: alpine 
+      image: alpine 
+      args: ["sh","-c","printenv | grep host"]
+      envFrom:
+      - configMapRef:
+          name: data-sources

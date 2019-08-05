@@ -1,0 +1,23 @@
+# simple-label.yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: simple
+spec:
+  schedule: "* * * * *"
+  # concurrencyPolicy: # Allow 
+  jobTemplate:
+    spec:
+      template:
+       metadata:
+         labels:
+           cronjob-name: simple
+       spec:
+          containers:
+          - name: simple 
+            image: alpine
+            args:
+            - /bin/sh
+            - -c
+            - echo Executed at $(date) on Pod $HOSTNAME
+          restartPolicy: OnFailure

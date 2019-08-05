@@ -1,0 +1,15 @@
+# myservice.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: myservice
+spec:
+  selector:
+    prod: "true"
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: LoadBalancer
+  
+ 

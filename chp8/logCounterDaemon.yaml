@@ -1,0 +1,34 @@
+# logCDaemon.yaml
+apiVersion: apps/v1beta2
+kind: DaemonSet
+metadata:
+  name: logcd
+spec:
+  selector:
+    matchLabels:
+      name: logcd 
+  template:
+    metadata:
+      labels:
+        name: logcd 
+    spec:
+      containers:
+       - name: logcd 
+         image: busybox
+         args: 
+         - /bin/sh
+         - -c
+         - >
+           while true;
+             do cat /var/log/*.log | wc -l | nc -l -p 6667;
+           done
+         ports:
+         - containerPort: 6667 
+           hostPort: 6667 
+         volumeMounts:
+         - name: logdir
+           mountPath: /var/log     
+      volumes:
+      - name: logdir
+        hostPath:
+          path: /var/log

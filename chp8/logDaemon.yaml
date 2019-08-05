@@ -1,0 +1,24 @@
+# logDaemon.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: logd
+spec:
+  selector:
+    matchLabels:
+      name: logd 
+  template:
+    metadata:
+      labels:
+        name: logd 
+    spec:
+     containers:
+      - name: logd 
+        image: alpine
+        args: 
+        - /bin/sh
+        - -c
+        - nc -lk -p 6666 -e sh -c "cat >> /var/node_log"
+        ports:
+        - containerPort: 6666
+          hostPort: 6666 

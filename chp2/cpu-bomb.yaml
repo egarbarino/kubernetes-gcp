@@ -1,0 +1,21 @@
+# cpu-bomb.yaml
+apiVersion: v1
+kind: Pod 
+metadata: 
+  name: alpine
+spec: 
+  containers: 
+    - image: alpine 
+      name: alpine 
+      args:
+      - sh
+      - -c
+      - dd if=/dev/zero of=/dev/null
+      # Compute Resource Settings 
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "10m"
+        limits:
+          memory: "64Mi"
+          cpu: "12m"

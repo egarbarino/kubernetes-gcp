@@ -1,0 +1,25 @@
+# rebalance-down.yaml
+# Reduce key/store cluster to 2 replicas from 3
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: rebalance 
+spec:
+  restartPolicy: Never
+  containers:
+  - name: rebalance
+    image: python:alpine
+    args:
+    - bin/sh
+    - -c
+    - > 
+      python -u /var/scripts/rebalance.py
+      server-0.server,server-1.server,server-2.server
+      server-0.server,server-1.server
+    volumeMounts:
+      - name: scripts 
+        mountPath: /var/scripts
+  volumes: 
+  - name: scripts 
+    configMap: 
+      name: scripts 

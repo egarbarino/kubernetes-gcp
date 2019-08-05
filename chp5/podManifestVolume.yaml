@@ -1,0 +1,29 @@
+# podManifestVolume.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod 
+spec:
+  restartPolicy: Never
+  containers:
+    - name: alpine 
+      image: alpine 
+      args: 
+        - sh
+        - -c
+        - > 
+          apk update; 
+          apk add inotify-tools;
+          ls -l /var/config; 
+          while true; 
+          do cat /var/config/address;
+             inotifywait -q -e modify /var/config/address;
+          done
+      volumeMounts:
+        - name: my-volume
+          mountPath: /var/config
+  volumes: 
+    - name: my-volume 
+      configMap: 
+        name: data-sources
+

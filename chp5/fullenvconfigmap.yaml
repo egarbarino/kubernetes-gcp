@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: greeting
+data:
+  en: Hello
+  it: Ciao
+  pt: Ola
+  long: |
+    one.property=Loco Loco Loco
+    two.property=Loco More Loco Even
+    three.property=Ma ma ma ma ma
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      # command: [ "/bin/sh", "-c", "env" ]
+      envFrom:
+      - configMapRef:
+          name: greeting
+  restartPolicy: Never

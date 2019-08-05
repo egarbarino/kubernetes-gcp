@@ -1,0 +1,39 @@
+# part1/server.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  serviceName: server
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: server
+    spec:
+      containers:
+      - name: server 
+        image: python:alpine
+        args:
+        - bin/sh
+        - -c
+        - > 
+          pip install flask;
+          python -u /var/scripts/server.py 80 /var/data
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - name: scripts 
+            mountPath: /var/scripts
+          - name: data 
+            mountPath: /var/data
+      volumes: 
+        - name: scripts 
+          configMap: 
+            name: scripts
+        - name: data
+          emptyDir:
+            medium: Memory

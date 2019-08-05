@@ -1,0 +1,13 @@
+# part1/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: server
+  labels:
+    app: server
+spec:
+  ports:
+  - port: 80 
+  clusterIP: None
+  selector:
+    app: server

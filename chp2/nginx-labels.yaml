@@ -1,0 +1,13 @@
+# nginx-labels.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels:
+    env: prod 
+    author: Ernie
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+  restartPolicy: Never

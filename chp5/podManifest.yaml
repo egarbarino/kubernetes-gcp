@@ -1,0 +1,22 @@
+# podManifest.yaml 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-pod 
+spec:
+  restartPolicy: Never
+  containers:
+    - name: alpine 
+      image: alpine 
+      args: ["sh","-c","printenv | grep host"]
+      env:
+        - name: mysql_host
+          valueFrom:
+            configMapKeyRef:
+              name: data-sources
+              key: mysql_host
+        - name: ldap_host
+          valueFrom:
+            configMapKeyRef:
+              name: data-sources
+              key: ldap_host

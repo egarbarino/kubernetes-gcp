@@ -1,0 +1,32 @@
+# logDaemonClient.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client 
+spec:
+  replicas: 7
+  selector:
+    matchLabels:
+      name: client 
+  template:
+    metadata:
+      labels:
+        name: client
+    spec:
+      containers:
+      - name: client 
+        image: alpine
+        env:
+          - name: HOST_IP
+            valueFrom:
+              fieldRef:
+                fieldPath: status.hostIP        
+        args: 
+        - /bin/sh
+        - -c
+        - > 
+          while true; 
+            do echo $(date) - Greetings from $HOSTNAME | 
+            nc $HOST_IP 6666; 
+            sleep 15; 
+          done

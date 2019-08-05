@@ -1,0 +1,14 @@
+# alpine-mixed.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: alpine 
+spec:
+  containers:
+  - name: alpine
+    image: alpine
+    command: 
+    - sh
+    args:
+    - -c
+    - date

@@ -1,0 +1,17 @@
+# unlucky-onFailure.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: unlucky 
+spec:
+  backoffLimit: 3 
+  template:
+    spec:
+      restartPolicy: OnFailure 
+      containers:
+      - command:
+        - /bin/sh
+        - -c
+        - echo $HOSTNAME failed on $(date) ; exit 1 
+        name: unlucky 
+        image: alpine
