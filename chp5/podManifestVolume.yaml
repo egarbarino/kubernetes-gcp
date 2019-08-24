@@ -17,7 +17,8 @@ spec:
           ls -l /var/config; 
           while true; 
           do cat /var/config/address;
-             inotifywait -q -e modify /var/config/address;
+             inotifywait -q 
+               -e modify /var/config/address;
           done
       volumeMounts:
         - name: my-volume
