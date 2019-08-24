@@ -8,7 +8,10 @@ spec:
   containers:
     - name: alpine 
       image: alpine
-      args: ["/bin/sh","-c","echo Hello $(mysql_host)"]
+      args: 
+      - /bin/sh
+      - -c
+      - echo Hello $(mysql_host)
       envFrom:
       - configMapRef:
           name: data-sources
