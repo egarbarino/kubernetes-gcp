@@ -24,9 +24,9 @@ spec:
         args: 
         - /bin/sh
         - -c
-        - > 
+        - >- 
           while true; 
-            do echo $(date) - Greetings from $HOSTNAME | 
-            nc $HOST_IP 6666; 
-            sleep 15; 
+          do echo $(date) - Greetings from $HOSTNAME | 
+          nc $HOST_IP 6666; 
+          sleep 15; 
           done
