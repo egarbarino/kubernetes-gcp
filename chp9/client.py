@@ -31,7 +31,7 @@ print(' ' * 20 + '-' * 26)
 
 # Iterate through the alphabet repeatedly 
 while True:
-  print(str(datetime.datet$ime.now())[:19] + ' ',
+  print(str(datetime.datetime.now())[:19] + ' ',
         end='')
   hits = 0
   for c in string.ascii_lowercase:
