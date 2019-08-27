@@ -12,10 +12,10 @@ spec:
     args:
     - bin/sh
     - -c
-    - > 
-      python -u /var/scripts/rebalance.py
+    - "python -u /var/scripts/rebalance.py
       server-0.server,server-1.server
-      server-0.server,server-1.server,server-2.server
+      server-0.server,server-1.server,\
+      server-2.server"
     volumeMounts:
       - name: scripts 
         mountPath: /var/scripts

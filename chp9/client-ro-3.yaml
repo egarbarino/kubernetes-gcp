@@ -11,9 +11,9 @@ spec:
       args:
       - bin/sh
       - -c
-      - > 
-        python -u /var/scripts/client.py
-        server-0.server,server-1.server,server-2.server readonly
+      - "python -u /var/scripts/client.py
+        server-0.server,server-1.server,\
+        server-2.server readonly"
       volumeMounts:
         - name: scripts 
           mountPath: /var/scripts
