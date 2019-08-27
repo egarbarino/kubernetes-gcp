@@ -18,7 +18,9 @@ spec:
         args: 
         - /bin/sh
         - -c
-        - nc -lk -p 6666 -e sh -c "cat >> /var/node_log"
+        - >-
+          nc -lk -p 6666 -e 
+          sh -c "cat >> /var/node_log"
         ports:
         - containerPort: 6666
           hostPort: 6666 
