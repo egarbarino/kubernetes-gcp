@@ -1,4 +1,4 @@
-# part1/server.yaml
+# wip/server.yaml
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
