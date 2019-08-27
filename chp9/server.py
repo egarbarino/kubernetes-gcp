@@ -35,8 +35,9 @@ def allKeys():
   if os.path.isfile(dataDir + '_shutting_down_'):
     return "_shutting_down_", 503
   keys = ''.join(map(lambda x: x + ",", 
-                     filter(lambda f: os.path.isfile(dataDir+'/'+f), 
-                            os.listdir(dataDir)))).rstrip(',')
+         filter(lambda f: 
+                os.path.isfile(dataDir+'/'+f), 
+                os.listdir(dataDir)))).rstrip(',')
   return keys 
 
 if __name__ == '__main__':
