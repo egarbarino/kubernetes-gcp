@@ -11,8 +11,7 @@ spec:
       args:
       - bin/sh
       - -c
-      - >- 
-        "python -u /var/scripts/client.py
+      - "python -u /var/scripts/client.py 
         server-0.server,server-1.server,\
         server-2.server"
       volumeMounts:
