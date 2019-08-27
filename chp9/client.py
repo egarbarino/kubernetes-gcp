@@ -7,7 +7,8 @@ import urllib.error
 import datetime
 
 if len(sys.argv) < 2:
-  print('client.py SRV_1[:PORT],SRV_2[:PORT],... [readonly]')
+  print('client.py SRV_1[:PORT],SRV_2[:PORT],' + 
+        '... [readonly]')
   sys.exit(1)
 
 # Process input arguments
@@ -23,13 +24,15 @@ def curl(url):
 sn = len(servers)
 print(' ' * 20 + string.ascii_lowercase)
 print(' ' * 20 + '-' * 26)
-print(' ' * 20 + ''.join(map(lambda c: str(ord(c) % sn),
-                             string.ascii_lowercase)))
+print(' ' * 20 + ''.join(
+                   map(lambda c: str(ord(c) % sn),
+                       string.ascii_lowercase)))
 print(' ' * 20 + '-' * 26)
 
 # Iterate through the alphabet repeatedly 
 while True:
-  print(str(datetime.datetime.now())[:19] + ' ', end='')
+  print(str(datetime.datet$ime.now())[:19] + ' ',
+        end='')
   hits = 0
   for c in string.ascii_lowercase:
     server = servers[ord(c) % sn]
@@ -45,7 +48,8 @@ while True:
           print('m',end='')
         else:
           # Save Key/Value (not read only)
-          r = curl('http://' + server + '/save/' + c + '/' + c)
+          r = curl('http://' + server + 
+                   '/save/' + c + '/' + c)
           print('w',end='')
       # Value mismatch
       else:  
