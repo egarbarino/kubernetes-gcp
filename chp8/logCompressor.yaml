@@ -25,9 +25,10 @@ spec:
         args: 
         - /bin/sh
         - -c
-        - >
+        - >-
           while true;
-            do tar czf /var/log/all-logs-`date +%F`.tar.gz \
-               /var/log/*.log;
-            sleep 60;
+          do tar czf 
+          /var/log/all-logs-`date +%F`.tar.gz 
+          /var/log/*.log;
+          sleep 60;
           done
