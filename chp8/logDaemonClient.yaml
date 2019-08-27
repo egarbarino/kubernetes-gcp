@@ -26,7 +26,8 @@ spec:
         - -c
         - >- 
           while true; 
-          do echo $(date) - Greetings from $HOSTNAME | 
+          do echo $(date) -
+          Greetings from $HOSTNAME | 
           nc $HOST_IP 6666; 
           sleep 15; 
           done
