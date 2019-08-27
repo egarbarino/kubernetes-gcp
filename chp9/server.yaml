@@ -36,9 +36,10 @@ spec:
         args:
         - bin/sh
         - -c
-        - > 
+        - >- 
           pip install flask;
-          python -u /var/scripts/server.py 80 /var/data
+          python -u /var/scripts/server.py 80 
+          /var/data
         ports:
         - containerPort: 80
         volumeMounts:
