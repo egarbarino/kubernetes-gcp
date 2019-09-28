@@ -1,4 +1,4 @@
-# alpine-emptyDir.yaml
+# alpine-hostPath.yaml
 apiVersion: v1
 kind: Pod
 metadata:
